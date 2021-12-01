@@ -20,13 +20,13 @@ namespace ATMF_TranslationsTool
         BindingSource gridSource;
         TranslationsRepository repository;
 
-        public MainForm()
+        public MainForm(string workspace)
         {
 
             //SetTranslationsData();
             InitializeComponent();
 
-            workspace = @"D:\atmf-test\language";
+            this.workspace = workspace; //@"D:\atmf-test\language";
             gridSource = new BindingSource();
             repository = new TranslationsRepository();
             repository.LoadWorkspace(workspace);
@@ -182,6 +182,23 @@ namespace ATMF_TranslationsTool
                 if (keysInNS.Count != distinct.Count)
                     MessageBox.Show("Typed key already exists! You will loose data on save!");
             }
+        }
+
+        private void getHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Utilities.OpenWebURL("https://github.com/skito/ATMF-TranslationsTool-Windows/issues");
+        }
+
+        private void manageNamespacesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var nsManager = new NamespaceManager(repository);
+            nsManager.ShowDialog();
+            RebuildGrid();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

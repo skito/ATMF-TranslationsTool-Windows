@@ -11,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace ATMF_TranslationsTool.Components
 {
-    class TranslationsRepository
+    public class TranslationsRepository
     {
         public DataTable data = new DataTable();
         private BackgroundWorker wsSave = new BackgroundWorker();
         public event EventHandler WorkspaceSaved;
+
+        private List<string> namespacesToDelete = new List<string>();
 
         public TranslationsRepository(DataTable data = null)
         {
@@ -34,10 +36,13 @@ namespace ATMF_TranslationsTool.Components
         private void WsSave_DoWork(object sender, DoWorkEventArgs e)
         {
             var path = e.Argument.ToString();
-            if (!Directory.Exists(path))
+            var baseFolder = new DirectoryInfo(path);
+            if (!baseFolder.Exists)
             {
-                Directory.CreateDirectory(path);
+                baseFolder.Create();
+                //Directory.CreateDirectory(path);
             }
+            
 
             var languages = new List<string>();
             foreach (var column in data.Columns)
@@ -49,6 +54,18 @@ namespace ATMF_TranslationsTool.Components
                 }
             }
 
+            // Purge deleted namespaces
+            foreach(var ns in namespacesToDelete)
+            {
+                foreach(var lang in languages)
+                {
+                    var nsPath = baseFolder.FullName + "/" + lang + "/" + ns + ".json";
+                    if (File.Exists(nsPath))
+                        File.Delete(nsPath);
+                }
+            }
+
+            // Generate new data
             var structure = new Dictionary<string, Dictionary<string, object>>();
             for (var i = 0; i < data.Rows.Count; i++)
             {
@@ -81,11 +98,10 @@ namespace ATMF_TranslationsTool.Components
                         ((string[])structure[keyPath][realKey])[index] = row[lang].ToString();
                     }
                     else structure[keyPath][key] = row[lang];
-
                 }
             }
 
-            var baseFolder = new DirectoryInfo(path);
+            // Write data
             foreach (var ns in structure)
             {
                 var fileInfo = new FileInfo(baseFolder.FullName + "/" + ns.Key + ".json");
@@ -120,6 +136,33 @@ namespace ATMF_TranslationsTool.Components
             }
 
             return items;
+        }
+
+        public void AddNamespace(string ns)
+        {
+            var row = data.NewRow();
+            row["_Key"] = ns + ".newKey";
+            row["Key"] = "newKey";
+            data.Rows.Add(row);
+
+            namespacesToDelete.Remove(ns);
+        }
+
+        public void RemoveNamespace(string ns)
+        {
+            var rowsToRemove = new List<DataRow>();
+            foreach (DataRow row in data.Rows)
+            {
+                if (row["_Key"].ToString().IndexOf(ns + ".") == 0)
+                    rowsToRemove.Add(row);
+            }
+
+            foreach (DataRow row in rowsToRemove)
+            {
+                data.Rows.Remove(row);
+            }
+
+            namespacesToDelete.Add(ns);
         }
 
         public void SaveWorkspace(string path)

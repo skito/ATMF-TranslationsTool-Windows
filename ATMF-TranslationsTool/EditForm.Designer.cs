@@ -42,10 +42,11 @@ namespace ATMF_TranslationsTool
             this.txtContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtContent.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtContent.Location = new System.Drawing.Point(3, 2);
             this.txtContent.Multiline = true;
             this.txtContent.Name = "txtContent";
-            this.txtContent.Size = new System.Drawing.Size(797, 360);
+            this.txtContent.Size = new System.Drawing.Size(1167, 688);
             this.txtContent.TabIndex = 0;
             this.txtContent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContent_KeyDown);
             // 
@@ -53,9 +54,9 @@ namespace ATMF_TranslationsTool
             // 
             this.panel1.Controls.Add(this.btnApply);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 368);
+            this.panel1.Location = new System.Drawing.Point(0, 687);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 82);
+            this.panel1.Size = new System.Drawing.Size(1170, 82);
             this.panel1.TabIndex = 1;
             // 
             // btnApply
@@ -63,7 +64,7 @@ namespace ATMF_TranslationsTool
             this.btnApply.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnApply.Location = new System.Drawing.Point(0, 0);
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(800, 82);
+            this.btnApply.Size = new System.Drawing.Size(1170, 82);
             this.btnApply.TabIndex = 0;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
@@ -73,11 +74,11 @@ namespace ATMF_TranslationsTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1170, 769);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtContent);
             this.Name = "EditForm";
-            this.Text = "EditForm";
+            this.Text = "Edit Translation";
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

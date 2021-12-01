@@ -67,7 +67,7 @@ namespace ATMF_TranslationsTool
             this.translationsGrid.Name = "translationsGrid";
             this.translationsGrid.RowHeadersWidth = 82;
             this.translationsGrid.RowTemplate.Height = 41;
-            this.translationsGrid.Size = new System.Drawing.Size(1262, 982);
+            this.translationsGrid.Size = new System.Drawing.Size(1520, 982);
             this.translationsGrid.TabIndex = 0;
             this.translationsGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.translationsGrid_CellDoubleClick);
             this.translationsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.translationsGrid_CellEndEdit);
@@ -84,7 +84,7 @@ namespace ATMF_TranslationsTool
             this.ddlSections.Margin = new System.Windows.Forms.Padding(0);
             this.ddlSections.MaxDropDownItems = 10;
             this.ddlSections.Name = "ddlSections";
-            this.ddlSections.Size = new System.Drawing.Size(633, 982);
+            this.ddlSections.Size = new System.Drawing.Size(375, 982);
             this.ddlSections.TabIndex = 1;
             this.ddlSections.SelectedIndexChanged += new System.EventHandler(this.ddlSections_SelectedIndexChanged);
             // 
@@ -170,6 +170,7 @@ namespace ATMF_TranslationsTool
             this.manageNamespacesToolStripMenuItem.Name = "manageNamespacesToolStripMenuItem";
             this.manageNamespacesToolStripMenuItem.Size = new System.Drawing.Size(375, 44);
             this.manageNamespacesToolStripMenuItem.Text = "Manage Namespaces";
+            this.manageNamespacesToolStripMenuItem.Click += new System.EventHandler(this.manageNamespacesToolStripMenuItem_Click);
             // 
             // manageTranslationsToolStripMenuItem
             // 
@@ -197,6 +198,7 @@ namespace ATMF_TranslationsTool
             this.getHelpToolStripMenuItem.Name = "getHelpToolStripMenuItem";
             this.getHelpToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
             this.getHelpToolStripMenuItem.Text = "Get Help";
+            this.getHelpToolStripMenuItem.Click += new System.EventHandler(this.getHelpToolStripMenuItem_Click);
             // 
             // fileSystemWatcher1
             // 
@@ -220,7 +222,7 @@ namespace ATMF_TranslationsTool
             // 
             this.pnlSplit.Panel2.Controls.Add(this.translationsGrid);
             this.pnlSplit.Size = new System.Drawing.Size(1899, 982);
-            this.pnlSplit.SplitterDistance = 633;
+            this.pnlSplit.SplitterDistance = 375;
             this.pnlSplit.TabIndex = 3;
             // 
             // pnlStatus
@@ -251,6 +253,7 @@ namespace ATMF_TranslationsTool
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "ATMF Translations Tool";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.translationsGrid)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
