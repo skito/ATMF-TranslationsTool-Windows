@@ -18,6 +18,7 @@ namespace ATMF_TranslationsTool.Components
         public event EventHandler WorkspaceSaved;
 
         private List<string> namespacesToDelete = new List<string>();
+        private List<string> languagesToDelete = new List<string>();
 
         public TranslationsRepository(DataTable data = null)
         {
@@ -54,8 +55,16 @@ namespace ATMF_TranslationsTool.Components
                 }
             }
 
+            // Purge delete languages
+            foreach (var lang in languagesToDelete)
+            {
+                var nsPath = baseFolder.FullName + "/" + lang + "/";
+                if (Directory.Exists(nsPath))
+                    Directory.Delete(nsPath, true);
+            }
+
             // Purge deleted namespaces
-            foreach(var ns in namespacesToDelete)
+            foreach (var ns in namespacesToDelete)
             {
                 foreach(var lang in languages)
                 {
@@ -163,6 +172,45 @@ namespace ATMF_TranslationsTool.Components
             }
 
             namespacesToDelete.Add(ns);
+        }
+
+        public List<string> GetLanguages()
+        {
+            var items = new List<string>();
+            foreach (DataColumn column in data.Columns)
+            {
+                if (column.ColumnName != "_Key" && column.ColumnName != "Key")
+                {
+                    items.Add(column.ColumnName);
+                }
+            }
+
+            return items;
+        }
+
+        public void AddLanguage(string language)
+        {
+            data.Columns.Add(language);
+            languagesToDelete.Remove(language);
+        }
+
+        public void RemoveLanguage(string language)
+        {
+            var columnsToRemove = new List<DataColumn>();
+            foreach(DataColumn column in data.Columns)
+            {
+                if (column.ColumnName == language)
+                {
+                    columnsToRemove.Add(column);
+                }
+            }
+
+            foreach(DataColumn column in columnsToRemove)
+            {
+                data.Columns.Remove(column);
+            }
+
+            languagesToDelete.Add(language);
         }
 
         public void SaveWorkspace(string path)

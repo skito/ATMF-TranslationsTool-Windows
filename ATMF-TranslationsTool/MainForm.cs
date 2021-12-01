@@ -200,5 +200,12 @@ namespace ATMF_TranslationsTool
         {
             Application.Exit();
         }
+
+        private void manageTranslationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var lngManager = new LanguageManager(repository);
+            lngManager.ShowDialog();
+            RebuildGrid();
+        }
     }
 }

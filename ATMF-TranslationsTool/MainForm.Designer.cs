@@ -98,7 +98,7 @@ namespace ATMF_TranslationsTool
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1899, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1899, 42);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -108,7 +108,7 @@ namespace ATMF_TranslationsTool
             this.saveToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 38);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem
@@ -132,7 +132,7 @@ namespace ATMF_TranslationsTool
             this.pasteToolStripMenuItem,
             this.cutToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 36);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 38);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // copyToolStripMenuItem
@@ -162,7 +162,7 @@ namespace ATMF_TranslationsTool
             this.manageNamespacesToolStripMenuItem,
             this.manageTranslationsToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(159, 36);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(159, 38);
             this.toolStripMenuItem1.Text = "Translations";
             // 
             // manageNamespacesToolStripMenuItem
@@ -176,7 +176,8 @@ namespace ATMF_TranslationsTool
             // 
             this.manageTranslationsToolStripMenuItem.Name = "manageTranslationsToolStripMenuItem";
             this.manageTranslationsToolStripMenuItem.Size = new System.Drawing.Size(375, 44);
-            this.manageTranslationsToolStripMenuItem.Text = "Manage Translations";
+            this.manageTranslationsToolStripMenuItem.Text = "Manage Languages";
+            this.manageTranslationsToolStripMenuItem.Click += new System.EventHandler(this.manageTranslationsToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -184,7 +185,7 @@ namespace ATMF_TranslationsTool
             this.aboutToolStripMenuItem1,
             this.getHelpToolStripMenuItem});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(84, 36);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(84, 38);
             this.aboutToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem1
