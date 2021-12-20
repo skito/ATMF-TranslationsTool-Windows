@@ -143,7 +143,7 @@ namespace ATMF_TranslationsTool
 
         private string FormatJSONKey(string key)
         {
-            Regex rgx = new Regex("[^a-zA-Z0-9_]");
+            Regex rgx = new Regex("[^a-zA-Z0-9_<> ]");
             return rgx.Replace(key, "");
         }
 
