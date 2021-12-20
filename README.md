@@ -1,5 +1,7 @@
 # ATMF Translations Tool for Windows
 
+![Main screen](https://github.com/skito/ATMF-TranslationsTool-Windows/blob/master/Screenshots/main.png)
+
 Tool for Windows which enables you to easely mange ATMF translations (workspaces). 
 
 ## Definitions when working with the app
