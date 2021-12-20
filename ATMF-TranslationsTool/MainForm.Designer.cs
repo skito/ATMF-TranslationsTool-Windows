@@ -34,11 +34,14 @@ namespace ATMF_TranslationsTool
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeWorkspaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.manageNamespacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageTranslationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,10 +67,11 @@ namespace ATMF_TranslationsTool
             this.translationsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.translationsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.translationsGrid.Location = new System.Drawing.Point(0, 0);
+            this.translationsGrid.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.translationsGrid.Name = "translationsGrid";
             this.translationsGrid.RowHeadersWidth = 82;
             this.translationsGrid.RowTemplate.Height = 41;
-            this.translationsGrid.Size = new System.Drawing.Size(1520, 982);
+            this.translationsGrid.Size = new System.Drawing.Size(819, 460);
             this.translationsGrid.TabIndex = 0;
             this.translationsGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.translationsGrid_CellDoubleClick);
             this.translationsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.translationsGrid_CellEndEdit);
@@ -84,7 +88,7 @@ namespace ATMF_TranslationsTool
             this.ddlSections.Margin = new System.Windows.Forms.Padding(0);
             this.ddlSections.MaxDropDownItems = 10;
             this.ddlSections.Name = "ddlSections";
-            this.ddlSections.Size = new System.Drawing.Size(375, 982);
+            this.ddlSections.Size = new System.Drawing.Size(202, 460);
             this.ddlSections.TabIndex = 1;
             this.ddlSections.SelectedIndexChanged += new System.EventHandler(this.ddlSections_SelectedIndexChanged);
             // 
@@ -94,11 +98,13 @@ namespace ATMF_TranslationsTool
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.toolStripMenuItem1,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1899, 42);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(1023, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -106,55 +112,85 @@ namespace ATMF_TranslationsTool
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.closeWorkspaceToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(277, 44);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
-            // exitToolStripMenuItem
+            // closeWorkspaceToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(277, 44);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.closeWorkspaceToolStripMenuItem.Name = "closeWorkspaceToolStripMenuItem";
+            this.closeWorkspaceToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.closeWorkspaceToolStripMenuItem.Text = "Close";
+            this.closeWorkspaceToolStripMenuItem.Click += new System.EventHandler(this.closeWorkspaceToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cutToolStripMenuItem,
             this.copyToolStripMenuItem,
-            this.pasteToolStripMenuItem,
-            this.cutToolStripMenuItem});
+            this.pasteToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 38);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 22);
             this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(284, 44);
-            this.copyToolStripMenuItem.Text = "Copy";
-            // 
-            // pasteToolStripMenuItem
-            // 
-            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(284, 44);
-            this.pasteToolStripMenuItem.Text = "Paste";
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(284, 44);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.cutToolStripMenuItem.Text = "Cut";
+            this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.columnsToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // columnsToolStripMenuItem
+            // 
+            this.columnsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.enToolStripMenuItem});
+            this.columnsToolStripMenuItem.Name = "columnsToolStripMenuItem";
+            this.columnsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.columnsToolStripMenuItem.Text = "Columns";
+            // 
+            // enToolStripMenuItem
+            // 
+            this.enToolStripMenuItem.Checked = true;
+            this.enToolStripMenuItem.CheckOnClick = true;
+            this.enToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.enToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.enToolStripMenuItem.Name = "enToolStripMenuItem";
+            this.enToolStripMenuItem.Size = new System.Drawing.Size(87, 22);
+            this.enToolStripMenuItem.Text = "en";
             // 
             // toolStripMenuItem1
             // 
@@ -162,20 +198,22 @@ namespace ATMF_TranslationsTool
             this.manageNamespacesToolStripMenuItem,
             this.manageTranslationsToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(159, 38);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(81, 22);
             this.toolStripMenuItem1.Text = "Translations";
             // 
             // manageNamespacesToolStripMenuItem
             // 
             this.manageNamespacesToolStripMenuItem.Name = "manageNamespacesToolStripMenuItem";
-            this.manageNamespacesToolStripMenuItem.Size = new System.Drawing.Size(375, 44);
+            this.manageNamespacesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.manageNamespacesToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.manageNamespacesToolStripMenuItem.Text = "Manage Namespaces";
             this.manageNamespacesToolStripMenuItem.Click += new System.EventHandler(this.manageNamespacesToolStripMenuItem_Click);
             // 
             // manageTranslationsToolStripMenuItem
             // 
             this.manageTranslationsToolStripMenuItem.Name = "manageTranslationsToolStripMenuItem";
-            this.manageTranslationsToolStripMenuItem.Size = new System.Drawing.Size(375, 44);
+            this.manageTranslationsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.manageTranslationsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.manageTranslationsToolStripMenuItem.Text = "Manage Languages";
             this.manageTranslationsToolStripMenuItem.Click += new System.EventHandler(this.manageTranslationsToolStripMenuItem_Click);
             // 
@@ -185,19 +223,20 @@ namespace ATMF_TranslationsTool
             this.aboutToolStripMenuItem1,
             this.getHelpToolStripMenuItem});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(84, 38);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.aboutToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(241, 44);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem1.Text = "About";
+            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
             // getHelpToolStripMenuItem
             // 
             this.getHelpToolStripMenuItem.Name = "getHelpToolStripMenuItem";
-            this.getHelpToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
+            this.getHelpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.getHelpToolStripMenuItem.Text = "Get Help";
             this.getHelpToolStripMenuItem.Click += new System.EventHandler(this.getHelpToolStripMenuItem_Click);
             // 
@@ -212,7 +251,8 @@ namespace ATMF_TranslationsTool
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlSplit.Cursor = System.Windows.Forms.Cursors.VSplit;
-            this.pnlSplit.Location = new System.Drawing.Point(0, 40);
+            this.pnlSplit.Location = new System.Drawing.Point(0, 19);
+            this.pnlSplit.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pnlSplit.Name = "pnlSplit";
             // 
             // pnlSplit.Panel1
@@ -222,8 +262,9 @@ namespace ATMF_TranslationsTool
             // pnlSplit.Panel2
             // 
             this.pnlSplit.Panel2.Controls.Add(this.translationsGrid);
-            this.pnlSplit.Size = new System.Drawing.Size(1899, 982);
-            this.pnlSplit.SplitterDistance = 375;
+            this.pnlSplit.Size = new System.Drawing.Size(1023, 460);
+            this.pnlSplit.SplitterDistance = 202;
+            this.pnlSplit.SplitterWidth = 2;
             this.pnlSplit.TabIndex = 3;
             // 
             // pnlStatus
@@ -231,29 +272,32 @@ namespace ATMF_TranslationsTool
             this.pnlStatus.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.pnlStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.pnlStatus.Location = new System.Drawing.Point(0, 1005);
+            this.pnlStatus.Location = new System.Drawing.Point(0, 469);
             this.pnlStatus.Name = "pnlStatus";
-            this.pnlStatus.Size = new System.Drawing.Size(1899, 42);
+            this.pnlStatus.Padding = new System.Windows.Forms.Padding(1, 0, 8, 0);
+            this.pnlStatus.Size = new System.Drawing.Size(1023, 22);
             this.pnlStatus.TabIndex = 4;
             this.pnlStatus.Text = "Ready";
             // 
             // lblStatus
             // 
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(78, 32);
+            this.lblStatus.Size = new System.Drawing.Size(39, 17);
             this.lblStatus.Text = "Ready";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1899, 1047);
+            this.ClientSize = new System.Drawing.Size(1023, 491);
             this.Controls.Add(this.pnlStatus);
             this.Controls.Add(this.pnlSplit);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "MainForm";
             this.Text = "ATMF Translations Tool";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.translationsGrid)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -277,7 +321,6 @@ namespace ATMF_TranslationsTool
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
@@ -292,6 +335,10 @@ namespace ATMF_TranslationsTool
         private System.Windows.Forms.StatusStrip pnlStatus;
         private System.Windows.Forms.SplitContainer pnlSplit;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem columnsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeWorkspaceToolStripMenuItem;
     }
 }
 

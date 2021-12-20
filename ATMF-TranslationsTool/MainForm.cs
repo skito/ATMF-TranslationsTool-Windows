@@ -19,6 +19,8 @@ namespace ATMF_TranslationsTool
         string workspace;
         BindingSource gridSource;
         TranslationsRepository repository;
+        bool hasChanges;
+        bool quitOnSave;
 
         public MainForm(string workspace)
         {
@@ -26,7 +28,10 @@ namespace ATMF_TranslationsTool
             //SetTranslationsData();
             InitializeComponent();
 
-            this.workspace = workspace; //@"D:\atmf-test\language";
+            this.workspace = workspace;
+            hasChanges = false;
+            quitOnSave = false;
+
             gridSource = new BindingSource();
             repository = new TranslationsRepository();
             repository.LoadWorkspace(workspace);
@@ -55,30 +60,12 @@ namespace ATMF_TranslationsTool
             translationsGrid.AutoSize = true;
             translationsGrid.DataSource = gridSource;
             translationsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            if (translationsGrid.Columns.Count > 0)
-                translationsGrid.Columns[0].Visible = false;
-            // translations.SelectMany(x => x);// gridSource;
-            
-
-            /*DataGridViewColumn column = new DataGridViewTextBoxColumn();
-            column.DataPropertyName = "resourceKey";
-            column.Name = "Resource Key";
-            translationsGrid.Columns.Add(column);
-
-            foreach (var language in languages)
-            {
-                DataGridViewColumn langColumn = new DataGridViewTextBoxColumn();
-                langColumn.DataPropertyName = "lang_" + language;
-                langColumn.Name = language;
-                translationsGrid.Columns.Add(langColumn);
-            }*/
-
-            /*ddlSections.Size = new Size(translationsGrid.Columns[0].Width, 100);
-            ddlSections.Location = new Point(80, 0);*/
+            if (translationsGrid.Columns.Count > 1)
+                translationsGrid.Columns[1].Visible = false;
 
             translationsGrid.RowTemplate.Height = 100;
             translationsGrid.RowTemplate.DefaultCellStyle.Padding = new Padding(5);
-            
+            RebuildColumnsMenuItems();
         }
 
         private void translationsGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -108,9 +95,9 @@ namespace ATMF_TranslationsTool
             for (var i = 0; i < translationsGrid.Rows.Count; i++)
             {
                 var row = translationsGrid.Rows[i];
-                if (row.Cells[0].Value != null && row.Cells[0].Value.ToString().IndexOf('.') > 0)
+                if (row.Cells[1].Value != null && row.Cells[1].Value.ToString().IndexOf('.') > 0)
                 {
-                    var keyParts = row.Cells[0].Value.ToString().Split('.');
+                    var keyParts = row.Cells[1].Value.ToString().Split('.');
                     row.Visible = (keyParts[0] == ddlSections.SelectedItem.ToString());
                 }
 
@@ -133,9 +120,9 @@ namespace ATMF_TranslationsTool
             var row = translationsGrid.Rows[e.RowIndex];
 
             var key = "";
-            if (row.Cells[1].Value != null && row.Cells[1].Value.ToString() != "")
+            if (row.Cells[0].Value != null && row.Cells[0].Value.ToString() != "")
             {
-                key = FormatJSONKey(row.Cells[1].Value.ToString());
+                key = FormatJSONKey(row.Cells[0].Value.ToString());
             }
 
             var keysInNS = repository.GetKeysByNamespace(ddlSections.SelectedItem.ToString());
@@ -150,8 +137,8 @@ namespace ATMF_TranslationsTool
                 } while (keysInNS.IndexOf(key) >= 0);
             }
 
-            row.Cells[1].Value = key;
-            translationsGrid.Rows[e.RowIndex].Cells[0].Value = ddlSections.SelectedItem.ToString() + "." + key;
+            row.Cells[0].Value = key;
+            translationsGrid.Rows[e.RowIndex].Cells[1].Value = ddlSections.SelectedItem.ToString() + "." + key;
         }
 
         private string FormatJSONKey(string key)
@@ -171,6 +158,8 @@ namespace ATMF_TranslationsTool
         private void Repository_WorkspaceSaved(object sender, EventArgs e)
         {
             lblStatus.Text = "Ready";
+            hasChanges = false;
+            if (quitOnSave) Close();
         }
 
         private void Data_ColumnChanged(object sender, DataColumnChangeEventArgs e)
@@ -182,6 +171,8 @@ namespace ATMF_TranslationsTool
                 if (keysInNS.Count != distinct.Count)
                     MessageBox.Show("Typed key already exists! You will loose data on save!");
             }
+
+            hasChanges = true;
         }
 
         private void getHelpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -191,9 +182,97 @@ namespace ATMF_TranslationsTool
 
         private void manageNamespacesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var nsCount = repository.GetNamespaces().Count;
             var nsManager = new NamespaceManager(repository);
             nsManager.ShowDialog();
             RebuildGrid();
+
+            if (repository.GetNamespaces().Count() != nsCount)
+                hasChanges = true;
+        }
+
+        private void manageTranslationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var lngCount = repository.GetLanguages().Count();
+            var lngManager = new LanguageManager(repository);
+            lngManager.ShowDialog();
+            RebuildGrid();
+
+            if (repository.GetLanguages().Count() != lngCount)
+                hasChanges = true;
+        }
+
+        private void RebuildColumnsMenuItems()
+        {
+            var hiddenColumns = new List<string>();
+            foreach(ToolStripMenuItem item in columnsToolStripMenuItem.DropDownItems)
+            {
+                if (!item.Checked)
+                    hiddenColumns.Add(item.Text);
+            }
+
+            columnsToolStripMenuItem.DropDownItems.Clear();
+            foreach (var lang in repository.GetLanguages())
+            {
+                var menuItem = new ToolStripMenuItem();
+                //menuItem.Checked = true;
+                menuItem.CheckOnClick = true;
+                menuItem.CheckState = CheckState.Checked;
+                menuItem.ImageScaling = ToolStripItemImageScaling.None;
+                menuItem.Name = "languageMenuItem_" + lang;
+                //menuItem.Size = new System.Drawing.Size(180, 22);
+                menuItem.Text = lang;
+                menuItem.CheckedChanged += LanguageMenuItem_CheckedChanged;
+
+                var isVisible = true;
+                foreach(var column in hiddenColumns)
+                {
+                    if (column == lang)
+                    {
+                        isVisible = false;
+                        break;
+                    }
+                }
+                menuItem.Checked = isVisible;
+                columnsToolStripMenuItem.DropDownItems.Add(menuItem);
+            }
+            
+        }
+
+        private void LanguageMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            var menuItem = (ToolStripMenuItem)sender;
+            var lang = menuItem.Text;
+            var isVisible = menuItem.Checked;
+
+            foreach(DataGridViewColumn column in translationsGrid.Columns)
+            {
+                if (column.HeaderText == lang)
+                {
+                    column.Visible = isVisible;
+                    break;
+                }
+            }
+        }
+
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SendKeys.Send("^X");
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SendKeys.Send("^C");
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SendKeys.Send("^V");
+        }
+
+        private void closeWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -201,11 +280,27 @@ namespace ATMF_TranslationsTool
             Application.Exit();
         }
 
-        private void manageTranslationsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var lngManager = new LanguageManager(repository);
-            lngManager.ShowDialog();
-            RebuildGrid();
+            if (hasChanges)
+            {
+                var result = MessageBox.Show("Do you want to save your changes before closing?", "You have unsaved changes", MessageBoxButtons.YesNoCancel);
+                if (result != DialogResult.No)
+                {
+                    e.Cancel = true;
+                    if (result == DialogResult.Yes)
+                    {
+                        quitOnSave = true;
+                        saveToolStripMenuItem_Click(null, null);
+                    }
+                }
+            }
+        }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var about = new About();
+            about.ShowDialog();
         }
     }
 }

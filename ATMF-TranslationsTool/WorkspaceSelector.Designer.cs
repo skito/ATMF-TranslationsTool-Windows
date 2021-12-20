@@ -35,18 +35,21 @@ namespace ATMF_TranslationsTool
             // 
             // btnCreateWorkspace
             // 
-            this.btnCreateWorkspace.Location = new System.Drawing.Point(136, 211);
+            this.btnCreateWorkspace.Location = new System.Drawing.Point(73, 99);
+            this.btnCreateWorkspace.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnCreateWorkspace.Name = "btnCreateWorkspace";
-            this.btnCreateWorkspace.Size = new System.Drawing.Size(269, 46);
+            this.btnCreateWorkspace.Size = new System.Drawing.Size(145, 43);
             this.btnCreateWorkspace.TabIndex = 3;
             this.btnCreateWorkspace.Text = "Create Workspace";
             this.btnCreateWorkspace.UseVisualStyleBackColor = true;
+            this.btnCreateWorkspace.Click += new System.EventHandler(this.btnCreateWorkspace_Click);
             // 
             // btnOpenWorkspace
             // 
-            this.btnOpenWorkspace.Location = new System.Drawing.Point(136, 133);
+            this.btnOpenWorkspace.Location = new System.Drawing.Point(73, 41);
+            this.btnOpenWorkspace.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnOpenWorkspace.Name = "btnOpenWorkspace";
-            this.btnOpenWorkspace.Size = new System.Drawing.Size(269, 46);
+            this.btnOpenWorkspace.Size = new System.Drawing.Size(145, 43);
             this.btnOpenWorkspace.TabIndex = 2;
             this.btnOpenWorkspace.Text = "Open Workspace";
             this.btnOpenWorkspace.UseVisualStyleBackColor = true;
@@ -54,11 +57,14 @@ namespace ATMF_TranslationsTool
             // 
             // WorkspaceSelector
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 382);
+            this.ClientSize = new System.Drawing.Size(306, 179);
             this.Controls.Add(this.btnCreateWorkspace);
             this.Controls.Add(this.btnOpenWorkspace);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.MaximumSize = new System.Drawing.Size(322, 218);
+            this.MinimumSize = new System.Drawing.Size(322, 218);
             this.Name = "WorkspaceSelector";
             this.Text = "Choose a workspace";
             this.Load += new System.EventHandler(this.WorkspaceSelector_Load);

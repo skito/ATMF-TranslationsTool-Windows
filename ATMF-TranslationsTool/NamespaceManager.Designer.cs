@@ -43,11 +43,11 @@ namespace ATMF_TranslationsTool
             this.ddlNamespaces.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.ddlNamespaces.FormattingEnabled = true;
             this.ddlNamespaces.IntegralHeight = false;
-            this.ddlNamespaces.Location = new System.Drawing.Point(0, 64);
+            this.ddlNamespaces.Location = new System.Drawing.Point(0, 9);
             this.ddlNamespaces.Margin = new System.Windows.Forms.Padding(0);
             this.ddlNamespaces.MaxDropDownItems = 10;
             this.ddlNamespaces.Name = "ddlNamespaces";
-            this.ddlNamespaces.Size = new System.Drawing.Size(823, 545);
+            this.ddlNamespaces.Size = new System.Drawing.Size(445, 279);
             this.ddlNamespaces.TabIndex = 2;
             // 
             // panel1
@@ -56,16 +56,18 @@ namespace ATMF_TranslationsTool
             this.panel1.Controls.Add(this.txtName);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(823, 66);
+            this.panel1.Size = new System.Drawing.Size(443, 31);
             this.panel1.TabIndex = 3;
             // 
             // btnCreate
             // 
             this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreate.Location = new System.Drawing.Point(630, 0);
+            this.btnCreate.Location = new System.Drawing.Point(339, 1);
+            this.btnCreate.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(193, 61);
+            this.btnCreate.Size = new System.Drawing.Size(104, 33);
             this.btnCreate.TabIndex = 1;
             this.btnCreate.Text = "Create";
             this.btnCreate.UseVisualStyleBackColor = true;
@@ -77,17 +79,19 @@ namespace ATMF_TranslationsTool
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Font = new System.Drawing.Font("Segoe UI", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtName.Location = new System.Drawing.Point(0, 4);
+            this.txtName.Location = new System.Drawing.Point(0, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(631, 57);
+            this.txtName.Size = new System.Drawing.Size(342, 32);
             this.txtName.TabIndex = 0;
             // 
             // btnRemove
             // 
             this.btnRemove.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnRemove.Location = new System.Drawing.Point(0, 612);
+            this.btnRemove.Location = new System.Drawing.Point(0, 286);
+            this.btnRemove.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(823, 61);
+            this.btnRemove.Size = new System.Drawing.Size(443, 29);
             this.btnRemove.TabIndex = 2;
             this.btnRemove.Text = "Delete Selected";
             this.btnRemove.UseVisualStyleBackColor = true;
@@ -95,12 +99,13 @@ namespace ATMF_TranslationsTool
             // 
             // NamespaceManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(823, 673);
+            this.ClientSize = new System.Drawing.Size(443, 315);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ddlNamespaces);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "NamespaceManager";
             this.Text = "Manage Namespaces";
             this.panel1.ResumeLayout(false);

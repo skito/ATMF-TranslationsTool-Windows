@@ -152,6 +152,12 @@ namespace ATMF_TranslationsTool.Components
             var row = data.NewRow();
             row["_Key"] = ns + ".newKey";
             row["Key"] = "newKey";
+            
+            foreach(var lang in GetLanguages())
+            {
+                row[lang] = "";
+            }
+
             data.Rows.Add(row);
 
             namespacesToDelete.Remove(ns);
@@ -227,8 +233,8 @@ namespace ATMF_TranslationsTool.Components
             }
 
             data = new DataTable();
-            data.Columns.Add("_Key");
             data.Columns.Add("Key");
+            data.Columns.Add("_Key");
             string[] folders = Directory.GetDirectories(path);
             foreach(var folder in folders)
             {
