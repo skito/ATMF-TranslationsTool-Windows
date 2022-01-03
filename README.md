@@ -2,10 +2,13 @@
 ![GitHub release (latest by date)](https://img.shields.io/badge/platform-windows-lightgrey)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/skito/ATMF-TranslationsTool-Windows?label=Beta)
 
+Tool for Windows which enables you to easily manage ATMF translations (workspaces). 
 
 ![Main screen](https://github.com/skito/ATMF-TranslationsTool-Windows/blob/master/Screenshots/main.png)
 
-Tool for Windows which enables you to easily manage ATMF translations (workspaces). 
+&nbsp;
+&nbsp;
+&nbsp;
 
 ## Definitions when working with the app
 
