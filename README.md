@@ -1,4 +1,5 @@
 # ATMF Translations Tool for Windows
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/skito/ATMF-TranslationsTool-Windows?label=Beta)
 
 ![Main screen](https://github.com/skito/ATMF-TranslationsTool-Windows/blob/master/Screenshots/main.png)
 
